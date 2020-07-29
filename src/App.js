@@ -4,11 +4,12 @@ import Balance from './components/Balance';
 import IncomeExpenses from './components/IncomeExpenses';
 import TranscationList from './components/TransactionList';
 import AddTransaction from './components/AddTransaction';
+import { AppContextProvider } from './context/AppContext';
 import './App.css';
 
 function App() {
   return (
-    <div>
+    <AppContextProvider>
       <Header />
       <div className='container'>
         <Balance />
@@ -16,7 +17,7 @@ function App() {
         <TranscationList />
         <AddTransaction />
       </div>
-    </div>
+    </AppContextProvider>
   );
 }
 

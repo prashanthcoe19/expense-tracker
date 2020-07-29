@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../context/AppContext';
 const AddTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
+
+  const { addTransaction } = useContext(AppContext);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const newTransaction = {
+      id: Math.floor(Math.random() * 10000000),
+      text,
+      amount: +amount,
+    };
+    addTransaction(newTransaction);
+  };
   return (
     <div>
       <h3>Add new transaction</h3>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className='form'>
           <label htmlFor='text'>Text</label>
           <input
@@ -29,7 +42,9 @@ const AddTransaction = () => {
             placeholder='Enter amount...'
           />
         </div>
-        <buttton className='btn'>Add transcation</buttton>
+        <buttton onClick={onSubmit} className='btn'>
+          Add transcation
+        </buttton>
       </form>
     </div>
   );
